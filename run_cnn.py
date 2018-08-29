@@ -193,7 +193,7 @@ if __name__ == '__main__':
     words, word_to_id = read_vocab(vocab_dir)
     config.vocab_size = len(words)
     model = TextCNN(config)
-
+    ###
     if sys.argv[1] == 'train':
         train()
     else:
