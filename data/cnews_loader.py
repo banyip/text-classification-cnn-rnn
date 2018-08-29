@@ -54,6 +54,18 @@ def read_file(filename):
                 pass
     return contents, labels
 
+def read_label_file(filename):
+    """读取文件数据"""
+    contents, labels = [], []
+    with open_file(filename) as f:
+        for line in f:
+            try:
+                label = line.strip()
+                if label:
+                    labels.append(native_content(label))
+            except:
+                pass
+    return labels
 
 def build_vocab(train_dir, vocab_dir, vocab_size=5000):
     """根据训练集构建词汇表，存储"""
@@ -81,10 +93,10 @@ def read_vocab(vocab_dir):
     return words, word_to_id
 
 
-def read_category():
+def read_category(filename):
     """读取分类目录，固定"""
-    categories = ['体育', '财经', '房产', '家居', '教育', '科技', '时尚', '时政', '游戏', '娱乐']
-
+    #categories = ['体育', '财经', '房产', '家居', '教育', '科技', '时尚', '时政', '游戏', '娱乐']
+    categories = read_label_file(filename)
     categories = [native_content(x) for x in categories]
 
     cat_to_id = dict(zip(categories, range(len(categories))))
